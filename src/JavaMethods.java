@@ -201,5 +201,30 @@ public class Calculation{
 
 
 
+//    Variable arguments
+//    1. This is used if you want to pass variable no of arguments to a function.
+//    2. Only one variable argument can be present in the method.
+//    3. It should be the last argument in the list.
 
+public class Calculation{
+        // passing variable no of arguments using ...(3 dots) & now this could be treated like a list
+    public int sum(int ...variable){
+        int output = 0;
+        for(int var: variable){
+            output += var;
+        }
+        return output;
+    }
 }
+
+public class Main{
+    public static void main(String args[]){
+        Calculation calculationObj = new Calculation();
+        System.out.println(calculationObj.sum(1, 2, 3));
+        System.out.println(calculationObj.sum(1, 2, 3, 4, 5));
+    }
+}
+
+
+
+
