@@ -169,6 +169,35 @@ public class Calculation{
 //1. Final methods cannot be overriden
 //2. WHy? final method means its implementation cannot be changed. If child class cannot change its implementation, then no use of overriding.Person
 
+    public class Vehicle{
+//        I have marked this method as final - because I dont want any child class to change its behaviour/implemetation
+        public final void getVehicleType(){
+            return "general vehicle"
+        }
+    }
+
+    public class Car extends Vehicle{
+//        @Override you cannot override
+        public void getVehicleType(){
+            return "Car"
+        }
+    }
+
+//Abstract method:
+//    1. It is defined only in Abstract classes.
+//    2. Only method declaration is done.
+//    3. Its implemetation is done in child classes.
+
+    public abstract class Person{
+        public abstract int print();
+    }
+
+    public class Doctor extends Person{
+        @Override
+        public int print(){
+            // child class will implement this
+        }
+    }
 
 
 
