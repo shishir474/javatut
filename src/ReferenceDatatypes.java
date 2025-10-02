@@ -66,6 +66,7 @@ public class ReferenceDatatypes {
 //
 //        Teacher t1 = new Teacher();
 //        Person t2 = new Teacher();
+//        t1, t2 just holds the reference of the 2 objects created in heap. Since teacher is a child class of Person interface, parent can hold the reference of its child
 //        above lines creates 2 teacher objects in the heap memory and their reference is stored in t1 and t2 variables.
 //        t1 is of type Teacher, whereas t2 is of type Person. Both are valid
 
@@ -73,6 +74,61 @@ public class ReferenceDatatypes {
 //        Person e2 = new Engineer();
 //        these creates 2 engineer objects in heap memory whose reference is stored in e1 and e2 which is of type Engineer and Person respectively.
 
+//        Person p1 = new Person();       X Wrong
+//        You cannot create an object of an interface, because interface just defines a blue print which has to be implemented by the child classes.
+//        Child classes provides the implementation of interface's methods, hence you can create objects of those and store their reference inside their own class type or parent(interface) type
+
+//        creating 1D and 2D arrays
+
+        int arr[] = new int[5];
+        int[] arr1 = new int[5];
+        System.out.println(arr);
+
+        int arr3[][] = new int[3][2];
+        int[][] arr4 = new int[3][2];
+
+        System.out.println(arr3);
+
+
+//      In Java everything is pass by value. There is no concept of pointers. But using the reference data types, we are able to acheive everything that we used to in CPP.
+//      Reference data types: Class, String, Interface, Arrays
+
+//        Wrapper class (Autoboxing , Unboxing)
+//
+//        Primitive Datatypes are stored in stack memory.
+//        Each primiitive data type has a wrapper class. For instance,
+//                int -> Integer
+//                char -> Character
+//                short -> Short
+//                long -> Long
+//                byte -> Byte
+//                double -> Double
+//                float -> Float
+//                boolean -> Boolean
+//
+//Why we need Wrapper class?
+//        Reference Capability: Scenarios where you want to pass the object to another method, there something changes, and that needs to be reflected.That can only happen in reference datatypes
+//        All the java colleecions work with reference datatypes, not with primitive datatypes
+
+        Integer x = 10;
+        int x1 = x;     // wrapper class to primitive (unboxing)
+
+        int y = 100;
+        Integer y1 = y; // primitive to wrapper class (autoboxing)
+        System.out.println(x);
+
+
+
+//        Constant variables
+
+//        static int empId = 10;
+//        static --> only 1 copy exists which is shared by all the objects. They belong to class, not to any individual objects.
+//        They are accessed using classname.varname
+
+//        If you want to define constant variables (var whose value cannot be changed) -> use final
+//        static final int EMP_ID = 10;
+//        Now you cannot change the value of this variable. It is read only
+//        static final variable (similar to const in C) only 1 copy and immutable
 
 
     }
