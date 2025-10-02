@@ -165,6 +165,10 @@ public class Calculation{
 
 
 
+//Final method
+//1. Final methods cannot be overriden
+//2. WHy? final method means its implementation cannot be changed. If child class cannot change its implementation, then no use of overriding.Person
+
 
 
 
