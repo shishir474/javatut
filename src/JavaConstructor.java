@@ -78,6 +78,30 @@ Employee e = new Employee();
         }
 
 
+//    Why constructor cannot be abstracted?
+//    To create an abstract method, we need an abstract class, lets say Employee, and in abstract method, we define only declaration and not defination
+//    When I create a subclass which extends this abstract class, responsibility of providing the implementation of abstract method is on subclass.
+//    So child class has to provide the implementation. But we know, constructors cannot be inherited. So if you cannot inherit it, how will you provide the implementation.
+//    Hence constructors cannot be abstracted.
+
+    abstract means: must be overridden in a subclass.
+    But constructors are never inherited and thus cannot be overridden.
+    Each class must define its own constructor.
+
+👉 If Java allowed abstract constructors, subclasses would be forced to implement/override them, but that concept makes no sense.
+
+    public abstract class Employee{
+        abstract Employee();       //  Not allowed
+        public abstract void print();
+    };
+
+    public class Manager extends Employee{
+        @Override
+        public void print(){
+            // provide implemetation
+        }
+    };
+
 //    Why constructor cannot be static?
 //    Can we define constructor in interface?
 //    Why constructor name is same as class name? - This is because it is easy to identify which one is the constructor in a class if you have a bunch of methods
