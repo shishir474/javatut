@@ -120,5 +120,94 @@ public class JavaMemoryManagement {
         Hence, we should be cautious when we change the references or delete the reference (by setting as null). It makes the object unreferenced and GC will delete that object.
 
 
+    Heap Memory
+            is divided into 2 parts Young Generation(YG) & Old Generation(OG) and non heap space (Metaspace)
+            YG is futher divided into 3 parts Eden, S0 & S1.
+            S0 & S1 are also known as survivors space.
+            Whenever we create any new object, space is allocated inside Eden.
+
+            Assume we created 5 objects o1, o2, o3, o4, o5. All of them will be created inside Eden.
+
+            Eden = {o1, o2, o3, o4, o5}
+            s0 = {}
+            s1 = {}
+
+            1st GC invocation happens:
+                GC uses Mark & Sweep Algorithm to delete objects. In phase one(Mark phase) GC marks all the objects that are no longer referenced.
+                In the second phase(Sweep phase) -  it will first delete the objects that were marked during the Mark phase and then sweeps the survivor objects alternatively into one of the survivor stacks S0 or S1 and it also increases their age.
+                This is known as minor GC, becuause it happens very frequently and is very fast.
+
+            Assume o2 and o5 are no longer referenced by anyone. GC will mark them and will delete them freeing up space from heap memory.
+            it will push the survivor objects o1, o3, & o4 into S1 and their age will become 1 (incremented by 1 during each clean up operation)
+
+            Eden = {}
+            s0 = {o1(age=1), o3(age=1), o4(age=1)}
+            s1 = {}
+
+            New objects created - lets say o6 and o7
+            Space for o6 and o7 will be allocated in Eden.
+
+            Eden = {o6, o7}
+            s0 = {o1(age=1), o3(age=1), o4(age=1)}
+            s1 = {}
+
+            2nd GC invocation happens:
+            GC marks the objects that are no longer referenced and deletes them freeing up memory.
+            Assume o4 and o7 are unreferenced - they will be deleted and the survivor objects will be placed in the survior space with their age incremeted by 1.
+
+            Eden = {}
+            s0 = {}
+            s1 = {o6(age=1), o1(age=2), o3(age=2)}
+
+            NOTE: Certain threshold is defined. Once the object's age crosses that threshold, objects are promoted to OG(old generation)
+            Lets say that threshold age value is 3 in our case.
+
+            Created new objects o8, o9 -- space will be allocated in Eden
+            Eden = {o8, o9}
+            s0 = {}
+            s1 = {o6(age=1), o1(age=2), o3(age=2)}
+
+            3rd GC invocation happens
+                Assume o3 and o8 are unreferenced - so they will be deleted and the rest of them age increments by 1
+                Eden = {o9}
+                s0 = {o9(age=1), o6(age=1), o1(age=2)}
+                s1 = {}
+
+    Difference between YG and OG
+        1. In YG, garbage collection process is known as minor GC becaue it happens very frequently and is much faster
+            as compared to the garbage collection in OG which is known as major GC.
+        2. Freq of minor GC >> Freq of major GC
+        3. time required for minor GC(fast) << time required for major GC(slow)
+
+        Objects in OG are kinda heavy since they are alive from too long and they might hold too many references. Deleting those many references is time taking.
+
+        The process of garbage collection in YG and OG is same. Its just that in OG, this takes bit more time since there are too many references that needs to be deleted.
+
+    Metaspace (non heap space)
+        Stores class variables (declared using static keyword)
+        Stores constants (declared using static final keyword)
+        Stores class metadata (info about class)
+
+    Whenever JVM need to refer a class, it will load that class in Metaspace.
+
+    KEY POINTS:
+    1. There exists only one single copy of heap memory which is shared by all the threads, unlike stack where each thread gets its own stack space.
+    2. Heap memory contains string constant pool inside which your string literal objects are created. Its a separate space in heap memory allocated for storing string literals.
+    3. When Heap memory goes full, it throws java.lang.OutOfMemoryError
+    4. Heap memory is futher divided into
+            a. YG(young generation) -- minor GC happens here
+                1. Eden
+                2. Survivors (S0 and S1)
+            b. OG(old/tenured generation) -- major GC happens here
+            c. Permanent Generation (PermGen) -- valid in old java version before Java7
+                From Java8 onwards, Metaspace concept was introduced.
+
+    PermGen vs Metaspace
+        PermGen was part of heap and it was not expandable. So as soon as it got filled up, it used to throw java.lang.OutOfMemoryError
+        Metaspace is non-heap. Its separate from heap and thus is expandable as well.
+    They both store similar kind of data (class variables, constants, class metadata)
+
+
 
 }
+
