@@ -1,3 +1,5 @@
+import java.lang.ref.WeakReference;
+
 public class JavaMemoryManagement {
     // java memory management & garbage collector
 
@@ -74,8 +76,33 @@ public class JavaMemoryManagement {
     If heap memory is filling up fast, JVM will run the GC more frequently. If there's sufficient space, the freq of GC invocation will be reduced by JVM.
 
 
+    Reference Types
+            Person personObj = new Person();
+            created a Person object -- space will be allocated on heap and its reference is stored in personObj variable on stack.
 
+    Strong Reference
+            Assume GC is invoked, it will scap heap and try to determine objects that are no longer referenced and will delete those.
+    person object is being referenced here by personObj. This is strong reference.
+    GC will not delete this object.
 
+    Weak Reference:
+    we can create a weak reference using WeakReference class.
+    WeakReference<Person> weakPersonObj = new WeakReference<Person>(new Person());
+
+    If weak reference is created, the object lasts only until GC is not invoked. As soon as the GC is invoked, it will free up the space(deletes the object that has weak reference)
+    So its scope is very limited, and once the object is deleted, you will get null if you try to access it.
+
+    Soft Reference:
+        Its a type of weak reference in which the object is only deleted only if its very urgent.
+        Unless there is an emergency and space issue, GC will spare this object and will not delete it.
+        But in weak reference, GC doesnt care. It simply deletes the object if it is weakly referenced.
+
+    Access Safety wise
+        Strong Reference  >    Soft Reference   > WeakReference
+
+        Strong reference - (GC only deletes unreferenced object from heap)
+        Soft reference - (GC deletes weak reference objects only if its very necessary from heap)
+        Weak reference - (GC deletes weak reference objects from heap)
 
 
 
