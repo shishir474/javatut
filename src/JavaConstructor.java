@@ -148,4 +148,29 @@ class Manager implements Employee{
 
 //    Why constructor name is same as class name? - This is because it is easy to identify which one is the constructor in a class if you have a bunch of methods
 
+//Types of constructors.
+
+//        Default constructor:
+//            If we dont provide any constructor, internally java implicitly provides one for us. This is the default constructor, and it will initialise our instance variables with the default values.
+
+            public class Calculation{
+                public String name;
+            }
+            // Even though I have not explicitly created a constructor here, java will internally create a constructor here and initialise name with ""
+
+// int (primitive) -> default value is 0
+// String (reference) -> default value is null
+// Local variables (declared inside methods) → no default value (must be initialized explicitly else throws compile error).
+
+//    Type	   Default Value	Notes
+//    byte	    0	            8-bit integer
+//    short	    0	            16-bit integer
+//    long	    0L	            64-bit integer
+//    int	    0	            32-bit integer
+//    float	    0.0f	        32-bit floating point
+//    double	0.0d	        64-bit floating point
+//    char	   '\u0000'	        Null character (not '0')
+//    boolean	false	        Default is always false
+//    String	null	        Because it's a reference type
+//    Any Object Ref null	    Default for all non-primitives
 }
