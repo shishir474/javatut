@@ -225,7 +225,37 @@ public class JavaConstructor {
 //    Why they can't be inherited? Because the naming problem would occur. Child class would treat it as a method and since constructors don't have a return type, this will fail
 
 
+    // 5. private constructors
+//    If you declare your constructor private, nobody will be allowed to call your constructor or create object outside of this class.
 
+//    used in singleton pattern
+//    If you dont declare your constructor to be private, then anybody can call this and create an object.
+//    By making it private, only this class has access to call the constructor.
+//    created a public getInstance() method which calls this constructor and returns an instance
+
+//    In singleton pattern --> only one object instance is created and we restrict the creation of objects by making the constructor private
+//    We will slightly update the logic of getInstance() method to just create one single instance.
+//    But the basic idea is -- you will always have one single instance of this class
+
+    public class Calculation{
+        private Calculation(){
+        }
+
+        public static Calculation getInstance(){
+            return new Calculation();
+        }
+    }
+
+    public class Main{
+        public static void main(){
+//            Calculation calculationObj = new Calculation();
+//            we cannot call new Calculation() since we declared constructor to be private. hence we cannot create the object
+//            That is why we need to make getInstance() method static, so that it can be called from classname
+
+              Calculation calculationObj = Calculation.getInstance();
+
+        }
+    }
 
 
 }
