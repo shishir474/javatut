@@ -84,11 +84,11 @@ Employee e = new Employee();
 //    So child class has to provide the implementation. But we know, constructors cannot be inherited. So if you cannot inherit it, how will you provide the implementation.
 //    Hence constructors cannot be abstracted.
 
-    abstract means: must be overridden in a subclass.
-    But constructors are never inherited and thus cannot be overridden.
-    Each class must define its own constructor.
+//    abstract means: must be overridden in a subclass.
+//    But constructors are never inherited and thus cannot be overridden.
+//    Each class must define its own constructor.
 
-👉 If Java allowed abstract constructors, subclasses would be forced to implement/override them, but that concept makes no sense.
+//👉 If Java allowed abstract constructors, subclasses would be forced to implement/override them, but that concept makes no sense.
 
     public abstract class Employee{
         abstract Employee();       //  Not allowed
@@ -124,7 +124,28 @@ Employee e = new Employee();
 //    But constructors are meant to initialize objects, so they’re tied to object creation, not the class itself.
 //    If constructors were static, they could be called without creating an object — which defeats their whole purpose.
 
+
 //    Can we define constructor in interface?
+//    We know that in interface, we only provide method declaration, no definition/body. Subclass which implements this interface needs to provide the implementation of this method.
+//    You cannot instantiate or create an object of an interface. You can only instantiate Manager class & for that you will need a constructor, because constructor is used to create and initialise the object/instance.
+//    For interface, anyway you cannot instantiate it. Hence concept of constructors doesn't apply to interfaces
+        Employee e = new Employee(); // X Invalid
+
+interface Employee{
+    void print();
+}
+
+class Manager implements Employee{
+    void print(){
+        // provide implementation
+    }
+}
+
+//👉 “By default, interfaces only provide method declarations and not definitions.
+//    However, starting with Java 8, interfaces can also contain default and static methods with implementations,
+//    and from Java 9, even private methods.”
+
+
 //    Why constructor name is same as class name? - This is because it is easy to identify which one is the constructor in a class if you have a bunch of methods
 
 }
