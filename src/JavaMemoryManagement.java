@@ -207,6 +207,36 @@ public class JavaMemoryManagement {
         Metaspace is non-heap. Its separate from heap and thus is expandable as well.
     They both store similar kind of data (class variables, constants, class metadata)
 
+    GC Algorithms:
+        1. Mark & Sweep
+        2. Mark & Sweep with Compaction
+            This is pretty much the same as traditional mark and sweep algo. It follows an additional compaction step which brings together the survivor objects together in the memory which is bit more efficient.
+
+    Different Versions of GC:
+        1. Serial GC
+        2. Parallel GC -- default version of GC in Java8
+        3. Concurrent Mark & Sweep (CMS)
+        4. G1 Garbage collector
+
+    Garbage collection is an expensive process. When GC work starts, all the application threads gets paused (the world stops when the GC runs)
+    So we would want to make sure that this pauses are as minimal as possible so that the performance/throughput of our app is not impacted.
+
+    In serial GC - only 1 thread of GC works which makes the entire GC process slow and time-intensive. GC will take lot of time and your apps performance will be impacted alot.
+
+    In Parallel GC - There are multiple threads of GC that are working in parallel, so this is bit more efficient that serial GC. But again, there will be some pauses - so there is a scope of improvement
+    Depending on the no of cores (whether its a 2 core cpu or 4 core cpu) - those many threads will be utilised for GC
+
+    CMS - From java17 onwards, concurrent mark and sweep technique was introduced. GC threads are also working in parallel with the application threads and the app threads are not even stopped(but this behaviour is not guranteed)
+    JVM tries its best to not stop the application thread and perform the clean up process in parallel. But its not 100% guaranteed.
+    Also no memory compaction happens (disadvantage).
+
+    G1 Garbage collector - GC threads work in parallel with the application threads(JVM tries to give us better assurance here as compared to CMS)
+        This also supports memory compaction (all the survivor objects are brought together and freed up space is put collectively -  which can be utilised later)
+
+    With these advancements - application thread's pause time is drastically reduced, which essentially means better throughput & performance.
+    With minimal pauses, application threads which earlier used to lets say process 1000 req/min, now they can process 1500 req/min
+    Latency is reduced, throughtput of the application is increased & consequently the performance is also improved
+
 
 
 }
