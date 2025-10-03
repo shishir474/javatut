@@ -183,10 +183,10 @@ public class Calculation{
         }
     }
 
-//Abstract method:
-//    1. It is defined only in Abstract classes.
-//    2. Only method declaration is done.
-//    3. Its implemetation is done in child classes.
+//    🔹 What are abstract methods?
+//    An abstract method is a method declared without a body (only signature).
+//    They are meant to be implemented by subclasses.
+//    Abstract methods can only exist inside abstract classes or interfaces.
 
     public abstract class Person{
         public abstract int print();
@@ -198,6 +198,16 @@ public class Calculation{
             // child class will implement this
         }
     }
+
+//    🔹 Rules of abstract methods
+//    They cannot be private (otherwise subclasses can’t access them).
+//    They cannot be static (static methods belong to the class, not objects) → no overriding possible.
+//    They cannot be final (must be overridden in subclasses).
+//    If a class has even one abstract method, the class must be declared abstract.
+
+//    🔹 Abstract class vs Interface (quick comparison)
+//    Abstract class: Can have both abstract + concrete methods, can define constructors, and can maintain state (instance variables).
+//    Interface: By default, all methods are abstract (until Java 8+, which added default and static methods). No constructors. Purely for contract.
 
 
 
