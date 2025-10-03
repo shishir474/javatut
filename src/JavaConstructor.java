@@ -7,18 +7,20 @@ public class JavaConstructor {
 //    b. Return Type: constructor do not have any return type
 //    c. Constructor cannot be static or final or abstract or synchronized.
 
-public class Employee{
-    public int empId;
+    public class Employee {
+        public int empId;
 
-    Employee(){
-        // constructor
+        Employee() {
+            // constructor
+        }
+
+        // methods can have same name as class name. This is totally valid
+        int Employee() {
+            // method
+        }
     }
-    // methods can have same name as class name. This is totally valid
-    int Employee(){
-        // method
-    }
-}
-Employee e = new Employee();
+
+    Employee e = new Employee();
 //    This new Employee() essentially tells java to call the constructor at the runtime and not the method(bcoz we can also have method with same name as class name)
 //    Constructor doesnt have a return type. Java implicitly adds return type as class, because we need an object of class itself.
 //    A method will always have a return type. This differentiates a method with the constructor
@@ -57,25 +59,25 @@ Employee e = new Employee();
 //    and final is used to prevent overriding.
 
 
-        public class Employee{
-            Employee(){
-                // constructor
-                System.out.println("parent class constructor");
-            }
+    public class Employee {
+        Employee() {
+            // constructor
+            System.out.println("parent class constructor");
+        }
+    }
+
+    public class Manager extends Employee {
+        // inside Manager class, java will treat Employee() as method and thus it must have some return type
+        void Employee() {
+
         }
 
-        public class Manager extends Employee{
-            // inside Manager class, java will treat Employee() as method and thus it must have some return type
-            void Employee(){
-
-            }
-
-            // Manager class's constructor
-            Manager() {
-                super();    // calls parent class constructor
-                System.out.println("child class constructor");
-            }
+        // Manager class's constructor
+        Manager() {
+            super();    // calls parent class constructor
+            System.out.println("child class constructor");
         }
+    }
 
 
 //    Why constructor cannot be abstracted?
@@ -90,18 +92,22 @@ Employee e = new Employee();
 
 //👉 If Java allowed abstract constructors, subclasses would be forced to implement/override them, but that concept makes no sense.
 
-    public abstract class Employee{
+    public abstract class Employee {
         abstract Employee();       //  Not allowed
-        public abstract void print();
-    };
 
-    public class Manager extends Employee{
+        public abstract void print();
+    }
+
+    ;
+
+    public class Manager extends Employee {
         @Override
-        public void print(){
+        public void print() {
             // provide implemetation
         }
-    };
+    }
 
+    ;
 
 
 //    Why constructor cannot be static?
@@ -110,12 +116,12 @@ Employee e = new Employee();
 //
 //    2nd problem: It is related to chaining. If you declare constructor static, you wont be able to use super()
 
-    class Employee{
+    class Employee {
         int empId;
 
         // marking Constructor static - then you wont be able to initialse non static member variables
         // Incorrect
-        static Employee(int val){ // X (static) Not allowed
+        static Employee(int val) { // X (static) Not allowed
             empId = value;
         }
     }
@@ -125,21 +131,21 @@ Employee e = new Employee();
 //    If constructors were static, they could be called without creating an object — which defeats their whole purpose.
 
 
-//    Can we define constructor in interface?
+    //    Can we define constructor in interface?
 //    We know that in interface, we only provide method declaration, no definition/body. Subclass which implements this interface needs to provide the implementation of this method.
 //    You cannot instantiate or create an object of an interface. You can only instantiate Manager class & for that you will need a constructor, because constructor is used to create and initialise the object/instance.
 //    For interface, anyway you cannot instantiate it. Hence concept of constructors doesn't apply to interfaces
-        Employee e = new Employee(); // X Invalid
+    Employee e = new Employee(); // X Invalid
 
-interface Employee{
-    void print();
-}
-
-class Manager implements Employee{
-    void print(){
-        // provide implementation
+    interface Employee {
+        void print();
     }
-}
+
+    class Manager implements Employee {
+        void print() {
+            // provide implementation
+        }
+    }
 
 //👉 “By default, interfaces only provide method declarations and not definitions.
 //    However, starting with Java 8, interfaces can also contain default and static methods with implementations,
@@ -150,13 +156,13 @@ class Manager implements Employee{
 
 //Types of constructors.
 
-//        Default constructor:
+//        1. Default constructor:
 //            If we dont provide any constructor, internally java implicitly provides one for us. This is the default constructor, and it will initialise our instance variables with the default values.
 
-            public class Calculation{
-                public String name;
-            }
-            // Even though I have not explicitly created a constructor here, java will internally create a constructor here and initialise name with ""
+    public class Calculation {
+        public String name;
+    }
+    // Even though I have not explicitly created a constructor here, java will internally create a constructor here and initialise name with ""
 
 // int (primitive) -> default value is 0
 // String (reference) -> default value is null
@@ -173,4 +179,56 @@ class Manager implements Employee{
 //    boolean	false	        Default is always false
 //    String	null	        Because it's a reference type
 //    Any Object Ref null	    Default for all non-primitives
+
+//    2. No Arg constructor
+//    looks very similar to default constructor,but this is defined by me.
+
+    public class Calculation {
+        public String name;
+
+        Calculation() {
+            name = null;
+        }
+    }
+
+//        NOTE: Whenever you define any constructor manually, default constructor is not added.
+//        Default constructor is only added if you dont define a constructor of your own.
+
+    //    3. parametrized constructor
+    public class Calculation {
+        public String name;
+
+        Calculation(String name) {
+            this.name = name;
+        }
+    }
+
+    // 4. Constructor Overloading (constructor with different arguments)
+
+    public class Calculation {
+        public String name;
+        public int empId;
+
+        Calculation(String name) {
+            this.name = name;
+        }
+        Calculation(String name, int empId){
+            // this.name refers to instance variable name
+            // In order to differentiate between instance variable and method's argument, we use this keyword
+            // this contains the object's reference and when we say this.name we are referring to object's instance variable name
+            this.name = name;
+            this.empId = empId;
+        }
+    }
+
+//    NOTE: There is no constructor overriding. Becuase they cannot be inherited.
+//    Why they can't be inherited? Because the naming problem would occur. Child class would treat it as a method and since constructors don't have a return type, this will fail
+
+
+
+
+
 }
+
+
+
