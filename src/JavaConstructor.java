@@ -258,6 +258,65 @@ public class JavaConstructor {
     }
 
 
+    // 6. Constructor Chaining
+//            using this and super()
+//        This can happen within one single class where you call the other constructors using this
+
+        public class Calculation{
+            int empId;
+            String name;
+
+            Calculation(){
+                this(10);
+            }
+            Calculation(int empId){
+                this(empId, "shishir");
+            }
+            Calculation(int empId, String name){
+                this.empId = empId;
+                this.name = name;
+            }
+
+        }
+
+
+//        using super()
+This applies in parent child class structures
+    public class Employee{
+        public int empId;
+        // super() refer to no arg constructor
+        Employee(){
+
+        }
+        // super(empId) refers to parametrized constructor
+        Employee(int empId){
+            System.out.println("Inside Employee no arg constructor");
+            this.empId = empId;
+        }
+    }
+    public class Manager extends Employee{
+        public int age;
+        Manager(int empId, int age){
+            // if your parent construct is no arg, then you dont need to write super(), java will automatically call that for you.
+            // But if your parent constructor is parametrized, then you need to explicitly call super(args) and pass the argument, becaue here java will call super() and it will refer to Employee() constructor
+            super(empId);    // super() is implicitly added by java
+            this.age = age;
+            System.out.println("Inside Manager no arg constructor");
+        }
+    }
+    public class Main{
+        public static void main(String args[]){
+            // super() is hidden, even if you dont write it, java internally adds super() at the first line itself.
+            // so first parent's constructor is called (parent's object need need to be constructed first)
+            // it calls the constructor from top to bottom fashion
+
+            // while creating objects of child class, you need to pass values for all variables (in parent & child class)
+            Manager m = new Manager("24", "Shishir");
+        }
+    }
+
+
+
 }
 
 
