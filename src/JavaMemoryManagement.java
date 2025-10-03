@@ -105,5 +105,20 @@ public class JavaMemoryManagement {
         Weak reference - (GC deletes weak reference objects from heap)
 
 
+    How references can be changed and its impact?
+        Person personObj1 = new Person();
+        Person personObj2 = new Person();
+
+        created 2 person objects in heap and their reference is stored in personObj1 and personObj2
+        Now if I set personObj1 = null
+        person object still exists in memory, just that its reference is deleted. If GC is invoked now, it will find that this object is not referenced by anyone and it will delete that object.
+
+        If I write personObj1 = personObj2;
+        I just changed the reference of personObj1 and now it points to personObj2.
+        personObj1 object is no longer being referenced by anyone. GC will delete that object from the heap memory.
+
+        Hence, we should be cautious when we change the references or delete the reference (by setting as null). It makes the object unreferenced and GC will delete that object.
+
+
 
 }
