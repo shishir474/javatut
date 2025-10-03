@@ -102,7 +102,28 @@ Employee e = new Employee();
         }
     };
 
+
+
 //    Why constructor cannot be static?
+//    static methods can only access static variables & static methods. It cannot access non static instance variables, because it is not aware of which object it belongs to.
+//    So if you define the constructor static, you wont be able to initialize the non static instance variables.
+//
+//    2nd problem: It is related to chaining. If you declare constructor static, you wont be able to use super()
+
+    class Employee{
+        int empId;
+
+        // marking Constructor static - then you wont be able to initialse non static member variables
+        // Incorrect
+        static Employee(int val){ // X (static) Not allowed
+            empId = value;
+        }
+    }
+
+//    static means: belongs to the class, not to an object.
+//    But constructors are meant to initialize objects, so they’re tied to object creation, not the class itself.
+//    If constructors were static, they could be called without creating an object — which defeats their whole purpose.
+
 //    Can we define constructor in interface?
 //    Why constructor name is same as class name? - This is because it is easy to identify which one is the constructor in a class if you have a bunch of methods
 
