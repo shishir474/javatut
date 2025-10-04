@@ -53,7 +53,7 @@ public class AbstractClass {
             You must create a concrete subclass (for abstract class) or a class that implements the interface.
 
         4. Inheritance Rules
-         Abstract Class:
+             Abstract Class:
                 Can extend another abstract class.
                 The child abstract class may:
                     a. Provide implementation for parent’s abstract methods.

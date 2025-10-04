@@ -193,8 +193,8 @@ public class ConcreteClass {
 //    Use case	         Backward compatibility, common logic	    Utility/helper methods
 
 
-🔹  Multiple Inheritance Issue (Diamond Problem)
-    If two interfaces provide the same default method, the implementing class must override it to resolve ambiguity:
+//🔹  Multiple Inheritance Issue (Diamond Problem)
+//    If two interfaces provide the same default method, the implementing class must override it to resolve ambiguity:
 
     interface A {
         default void show() {
