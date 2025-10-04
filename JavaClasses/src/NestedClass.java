@@ -159,5 +159,100 @@ public class NestedClass {
         }
     }
 
+//    Inheritance in nested class
+
+//    case 1: inheriting the class within 1 single class
+class OuterClass{
+    // created an instance variable - this will be related to an instance
+    int instanceVariable = 10;
+    // created classVariable - this will be related to class & not to any instance
+    static int classVariable = 20;
+
+    class InnerClass1{
+        int innerClass1Variable = 30;
+    }
+
+    class InnerClass2 extends InnerClass1{
+        int innerClass2Variable = 40;
+        public void display(){
+            System.out.println(instanceVariable + classVariable + innerClass1Variable + innerClass2Variable);
+        }
+    }
+
+}
+
+// How will I invoke display()?
+// display() is non static - which means we would need an object of InnerClass2
+// InnerClass2 is also non static - meaning we would also need object of OuterClass
+class ObjectTest{
+    public static void main(){
+        OuterClass outerClassObj = new OuterClass();
+        // using outerClassObj I can create objects of InnerClass1 and InnerClass2.
+        // we need object of InnerClass2
+        OuterClass.InnerClass2 innerClass2Obj =  outerClassObj.new InnerClass2();
+        innerClass2Obj.display();
+    }
+}
+
+
+// case 2:
+// 2.1 Inheriting the static nested class in SomeOtherClass
+    class OuterClass{
+        // created an instance variable - this will be related to an instance
+        int instanceVariable = 10;
+        // created classVariable - this will be related to class & not to any instance
+        static int classVariable = 20;
+
+        static class NestedClass{
+            public void display(){
+                System.out.println("Inside Static Nested Class");
+            }
+        }
+    }
+
+    // we want to extend NestedClass in SomeOtherClass.
+    // since NestedClass is static we can directly write OuterClass.NestedClass
+    class SomeOtherClass extends OuterClass.NestedClass{
+        public void display1(){
+            display();
+        }
+    }
+
+    // 2.2 Inheriting the inner class(non static) in SomeOtherClass
+    class OuterClass{
+        // created an instance variable - this will be related to an instance
+        int instanceVariable = 10;
+        // created classVariable - this will be related to class & not to any instance
+        static int classVariable = 20;
+
+        class InnerClass {
+            public void display(){
+                System.out.println("Inside Inner Class");
+            }
+        }
+    }
+
+    // we want to extend InnerClass in SomeOtherClass, and it is not static which means it is related to object of OuterClass
+    // first we will have to initiate the object of parent.
+    // Thats why we have to create a constructor of SomeOtherClass and create an object of OuterClass first and then call super()
+    class SomeOtherClass extends OuterClass.InnerClass{
+        SomeOtherClass{
+            // in order to invoke the constructor of InnerClass, I'll have to write new OuterClass.super() - so first create object of OuterClass and then call super()
+            new OuterClass().super();
+            // as we know, when child class constructor is invoked, it first invokes the constructor of parent class.
+            // but here the parent class is InnerClass, which can only be accessed using the object of OuterClass
+        }
+        public void display1(){
+            display();
+        }
+    }
+
+
+    A --> B
+    When we call new B() --> it calls B's constructor and inside that, it first calls A's constructor
+    So first A's object will be created and then B's object will be created.
+
+
+
 
 }
