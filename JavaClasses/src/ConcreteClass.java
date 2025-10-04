@@ -183,12 +183,46 @@ public class ConcreteClass {
 
 //✅ Use case: Placing common utility functions related to the interface.
 
-    🔹 3. Difference Between Default and Static Methods
-    Feature	        Default Method	                            Static Method
-    ------------------------------------------------------------------------------------------
-    Declaration	    default void methodName() {}	            static void methodName() {}
-    Belongs to	    Instance of the implementing class	        Interface itself
-    Overriding	    Can be overridden in implementing class	    Cannot be overridden
-    Invocation	    Via object reference (obj.method())	        Via interface name (Interface.method())
-    Use case	    Backward compatibility, common logic	    Utility/helper methods
+//    🔹 3. Difference Between Default and Static Methods
+//    Feature	        Default Method	                            Static Method
+//    ------------------------------------------------------------------------------------------
+//    Declaration	    default void methodName() {}	            static void methodName() {}
+//    Belongs to	    Instance of the implementing class	        Interface itself
+//    Overriding	    Can be overridden in implementing class	    Cannot be overridden
+//    Invocation	    Via object reference (obj.method())	        Via interface name (Interface.method())
+//    Use case	         Backward compatibility, common logic	    Utility/helper methods
+
+
+🔹  Multiple Inheritance Issue (Diamond Problem)
+    If two interfaces provide the same default method, the implementing class must override it to resolve ambiguity:
+
+    interface A {
+        default void show() {
+            System.out.println("A");
+        }
+    }
+    interface B {
+        default void show() {
+            System.out.println("B");
+        }
+    }
+    class C implements A, B {
+        // Must override to resolve conflict
+        @Override
+        public void show() {
+            A.super.show(); // Call A’s version explicitly
+            // or B.super.show();
+        }
+    }
+
+//    C class implements both interfaces A and B. So it will inherit the show method() from both the interfaces. Now since the same method is present in both interfaces, there will be conflict and we will have to manually resolve it by overriding the method in the class C.
+//    Inside class C, you provide your own show().
+//    But suppose you still want to call one of the parent interface’s default methods (A or B).
+//
+//    For that, Java gives this syntax:
+//
+//    InterfaceName.super.methodName();
+//
+//    super is normally used to call a method from the parent class.
+
 }
