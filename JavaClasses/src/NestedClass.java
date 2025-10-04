@@ -248,9 +248,41 @@ class ObjectTest{
     }
 
 
-    A --> B
-    When we call new B() --> it calls B's constructor and inside that, it first calls A's constructor
-    So first A's object will be created and then B's object will be created.
+//    A --> B
+//    When we call new B() --> it calls B's constructor and inside that, it first calls A's constructor
+//    So first A's object will be created and then B's object will be created.
+
+//    Anonymous Inner Class
+//    An inner class without a name is called anonymous inner class
+
+//    When its used?
+//        When we want to override the behaviour of the method without even creating any subclass
+
+    public abstract class Car{
+        public abstract void applyBrakes();
+    }
+
+    // In ideal case - we would create a subclass which extends this Car class and implements applyBrakes()
+    // But using anonymous class concept, we can do it in one single step - no need to explicitly create another class
+    public class Test{
+        public static void main(String args[]){
+            Car audiCarObj = new Car(){
+                @Override
+                public void applyBrakes(){
+                    // my audi specific implementation here
+                    System.out.println("Audi specific brake changes");
+                }
+            };      // semi-color here represents end of a statement
+
+            audiCarObj.applyBrakes();
+        }
+    }
+
+    //  Car audiCarObj = new Car()
+    // we're trying to create object of Car, but its an abstract class
+//    2 things happens here behind the scenes.
+//    a. a subclass is created, name is decided by the compiler
+//    b. creates an object of the subclass and assign its reference to object "audiCarObj"
 
 
 
