@@ -82,7 +82,82 @@ public class NestedClass {
         }
     }
 
+//    Inner class or non static nested class
 
+//    1. since this is non static - it has access to all the instance variables(static & non static) and method of outer class.
+//    2. its object can be initiated on after initiating the object of OuterClass
+
+    class OuterClass{
+        // created an instance variable - this will be related to an instance
+        int instanceVariable = 10;
+        // created classVariable - this will be related to class & not to any instance
+        static int classVariable = 20;
+
+        // since it's non static, it is a property of an OuterClass object and not the class itself
+        class NestedClass{
+            public void print(){
+                // can access both static and non static variables
+                System.out.println(classVariable + instanceVariable);
+            }
+        }
+    }
+
+    // How to invoke print()
+    // print() is non static - this means we need an object of NestedClass in order to invoke it.
+    // But for creating an object of NestedClass, we'll first need to create an object of OuterClass.
+    // We'll use that OuterClass object to create object of NestedClass
+    class ObjectTest{
+        public static void main(){
+            // created object of OuterClass
+            OuterClass outerClassObj = new OuterClass();
+            // creating object of NestedClass using OuterClass object
+            OuterClass.NestedClass nestedClassObj =  outerClassObj.new NestedClass();
+            nestedClassObj.print();
+        }
+    }
+
+    // Conclusion
+    // For static nested classes, we dont need an instance of OuterClass unless the NestedClass is declared private
+    // But for normal / non static nested class, we first need to instantiate OuterClass and use that instance to create object of NestedClass.
+    // NestedClass can be private, protected, public or default
+
+
+//Local Inner Class
+//    If you are creating inner class inside any block like for loop, while loop, if, method block etc
+//    It cannot be declared private, protected, public. Only default(not defined explicit) access modifier is used.
+//    Since its scope is only limited to that particular block, it cannot be instantiated outside of this block.
+
+    class OuterClass{
+        // created an instance variable - this will be related to an instance
+        int instanceVariable = 10;
+        // created classVariable - this will be related to class & not to any instance
+        static int classVariable = 20;
+
+        public void display(){
+            int methodLocalVariable = 4;
+
+            // scope of LocalInnerClass is only inside display() method. Hence we need to instantiate it inside display() method only
+            class LocalInnerClass{
+                int localInnerVariable = 5;
+                public void print(){
+                    // inside this method instanceVariable, classVariable, methodLocalVariable, localInnerVariable everything is accessible
+                    System.out.println(instanceVariable + classVariable + methodLocalVariable + localInnerVariable);
+                }
+            }
+
+            LocalInnerClass localInnerClassObj  = new LocalInnerClass();
+            localInnerClassObj.print();
+        }
+
+    }
+
+    class ObjectTest{
+        public static void main(){
+            // since display() method is non static - I'll need to create an instance of OuterClass and use that instance to invoke display()
+            OuterClass outerClassObj = new OuterClass();
+            outerClassObj.display();
+        }
+    }
 
 
 }
