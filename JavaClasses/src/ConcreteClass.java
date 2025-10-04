@@ -222,7 +222,5 @@ public class ConcreteClass {
 //    For that, Java gives this syntax:
 //
 //    InterfaceName.super.methodName();
-//
-//    super is normally used to call a method from the parent class.
 
 }
