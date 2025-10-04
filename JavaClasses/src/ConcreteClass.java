@@ -93,7 +93,102 @@ public class ConcreteClass {
 //      With @Override, it allows you to catch the errors at the compile time itseft, instead of catching it at runtime.
 
 
+// ------------------------------------------------------------------------------------------------
 
+//    static and default methods in Interfaces
 
+//🔹 1. Default Methods in Interfaces
+//    Introduced in Java 8 to allow backward compatibility.
+//    Before Java 8, if you added a new method to an interface, all implementing classes broke (because they had to implement it).
+//    With default, you can add a method with a body inside the interface.
+//
+//    👉 Key Points
+//    Declared with the keyword default.
+//    Provides a default implementation that implementing classes can use as-is or override.
 
+    interface Shape {
+        void computeArea();  // abstract method
+
+        // Default method (has body)
+        default void display() {
+            System.out.println("This is a shape");
+        }
+    }
+
+    class Rectangle implements Shape {
+        public void computeArea() {
+            System.out.println("Computing area of rectangle");
+        }
+        // We didn’t override display(), so Rectangle inherits the default implementation
+    }
+
+    class Circle implements Shape {
+        public void computeArea() {
+            System.out.println("Computing area of circle");
+        }
+        // Overriding the default method
+        @Override
+        public void display() {
+            System.out.println("This is a circle");
+        }
+    }
+
+    public class Test {
+        public static void main(String[] args) {
+            Shape rect = new Rectangle();
+            Shape circle = new Circle();
+
+            rect.display();   // "This is a shape" (from default)
+            circle.display(); // "This is a circle" (overridden)
+        }
+    }
+
+//✅ Use case: Adding new methods to interfaces without breaking old code.
+
+//    🔹 2. Static Methods in Interfaces
+//    Also introduced in Java 8.
+//    Can be called on the interface itself (not on the instance).
+//    Acts like a utility/helper method for that interface.
+
+//    👉 Key Points
+//    Declared with the keyword static.
+//    Cannot be inherited by implementing classes.
+//    Must be called using the interface name.
+
+    interface Shape {
+        void computeArea();
+
+        // Static method
+        static void info() {
+            System.out.println("This is a Shape interface");
+        }
+    }
+
+    class Rectangle implements Shape {
+        public void computeArea() {
+            System.out.println("Computing area of rectangle");
+        }
+    }
+
+    public class Test {
+        public static void main(String[] args) {
+            Shape rect = new Rectangle();
+            rect.computeArea();
+
+            // Calling static method
+            Shape.info();   // ✅ Correct way
+            // rect.info(); // ❌ Error: cannot call static method via object
+        }
+    }
+
+//✅ Use case: Placing common utility functions related to the interface.
+
+    🔹 3. Difference Between Default and Static Methods
+    Feature	        Default Method	                            Static Method
+    ------------------------------------------------------------------------------------------
+    Declaration	    default void methodName() {}	            static void methodName() {}
+    Belongs to	    Instance of the implementing class	        Interface itself
+    Overriding	    Can be overridden in implementing class	    Cannot be overridden
+    Invocation	    Via object reference (obj.method())	        Via interface name (Interface.method())
+    Use case	    Backward compatibility, common logic	    Utility/helper methods
 }
