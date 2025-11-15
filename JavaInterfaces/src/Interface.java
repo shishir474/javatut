@@ -125,4 +125,33 @@ public class Interface {
 //    Invalid:
     class C extends A, Object {}   // ❌ cannot extend two classes
 //    Even though A itself extends Object, Java sees only one parent at each level in the hierarchy.
+
+
+//    Methods in interface
+//    All methods in interface are implicitly public
+//    Methods cannot be declared final - bcoz we have just provided the signature. Actual implementation will be provided by the class implementing the interface.
+        // if we mark it as final -- then it cannot be modified.
+
+    public interface Bird{
+        // all methods inside interface are implicitly public
+        void fly(); // although no access modifier is specified, fly() is public
+        public void hasBreak();
+    }
+
+
+//   Fields in interface
+//    Fields in interface are public, static, and final implicitly (CONSTANTS)
+//    You cannot make fields private or protected.
+
+// static final -- is used to declare constant variables
+    public interface Bird{
+        int MAX_HEIGHT_IN_FEET = 200;
+    }
+//    Both interfaces are essentially same (all the fields within interfaces are public, static and final implicitly.
+    public interface Bird{
+        public static final int MAX_HEIGHT_IN_FEET = 200;
+    }
+
+
+
 }
