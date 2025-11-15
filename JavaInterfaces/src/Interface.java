@@ -38,12 +38,12 @@ public class Interface {
 
 //    This ambiguity is called the Diamond Problem. Java avoids it by allowing single inheritance only.
 
-//    Java compensates with interfaces.
+//   Java compensates with interfaces.
 //   Java does not allow multiple inheritance of classes, but it does allow multiple inheritance of interfaces
 //   because interfaces DO NOT create the diamond problem in the same way classes do.
 
     class MyClass extends BaseClass implements A, B, C {}
-//    Interfaces dont maintain states like classes
+//    Interfaces don't maintain states like classes
 //    Classes can have instance variables, constructors, muatable state
 //    If java allowed :
       class C extends A,B {};       // X Invalid
