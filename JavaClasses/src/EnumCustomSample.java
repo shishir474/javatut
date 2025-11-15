@@ -145,3 +145,55 @@ public class Main{
        // output: monday
     }
 }
+
+
+// What is the benefit of ENUM class when we can create constant through "static" and "final" keyword?
+    // Better readability and full control on what value we can pass in parameter
+
+public class WeekConstants{
+    // static final means constant variable (value cannot change)
+    // and static means these belongs to the class -  so we dont need any object to access these variables
+    public static final int MONDAY = 0;
+    public static final int TUESDAY = 1;
+    public static final int WEDNESDAY = 2;
+    public static final int THURSDAY = 3;
+    public static final int FRIDAY = 4;
+    public static final int SATURDAY = 5;
+    public static final int SUNDAY = 6;
+
+}
+
+// declared an enum with bunch of constants
+// ordinals will be assigned internally to each enum constant starting 0
+public enum EnumSample5{
+    MONDAY,     // 0
+    TUESDAY,    // 1
+    WEDNESDAY,  // 2
+    THURSDAY,   // 3
+    FRIDAY,     // 4
+    SATURDAY,   // 5
+    SUNDAY;     // 6
+}
+
+
+public class Main{
+    public static void main(String[] args){
+        isWeekend(0);  // monday, so it return false
+        isWeekend(5);  // saturday, so it return true
+        isWeekend(100); // return false -this value is not expected, but still we were able to send this in parameter
+
+        // Enums would be a better in this scenario (only accepts fixed set of values)
+
+        // Better readability and full control on what value we can pass in parameter
+        isWeekend(EnumSample5.FRIDAY);      // return false
+        isWeekend(EnumSample5.SATURDAY);    // return true
+    }
+
+    public static boolean isWeekend(int day){
+        return day == WeekConstants.SATURDAY || day == WeekConstants.SUNDAY;
+    }
+
+    public static boolean isWeekend(EnumSample5 day){
+        return day == EnumSample5.SATURDAY || day == EnumSample5.SUNDAY;
+    }
+}
