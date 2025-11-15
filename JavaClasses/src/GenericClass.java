@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class GenericClass {
 //    Generics in Java allow you to create classes, interfaces, and methods that operate on typed parameters, meaning you can specify the data type they work with at compile time instead of hardcoding it.
 //    In simpler words:
@@ -22,7 +20,7 @@ public class GenericClass {
     Box b = new Box();
     b.setItem("hello");
 
-//    major problem with using Object is we dont actually know with surity what class object it is and thus it can t hrow errors.
+//    major problem with using Object is we dont actually know with surity what class object it is and thus it can throw errors.
 //    This is where generic class comes into the picture. Using generic class it avoids this typecasting and makes it type safe
     Integer val = b.getItem(); // ❌ Runtime error: ClassCastException
 
@@ -137,26 +135,41 @@ public class GenericClass {
 //    Suppose you have created a generic class, so while creating an object of this class you are supposed to pass the type (like String, Integer or any non primitive datatypes).
 //    But if you dont pass the type then compiler implicitly passes Object as the type
 
-//created a generic class print
-public class Print<T>{
-    T value;
-    public setPrintValue(T value){
-        this.value = value;
-    }
-    public T getPrintValue(){
-        return value;
-    }
-}
-public class Main{
-    public static void main(String args[]) {
-        // created a printObj of Print<String> type
-        Print<String> parametrizedTypePrintObj = new Print<>();
 
-        // internally it passes Object as parametrized type
-        // internally it will be represented as Print<Object> rawTypePrintObj = new Print<>();
-        Print rawTypePrintObj = new Print();
-        rawTypePrintObj.setPrintValue(1);
-        rawTypePrintObj.setPrintValue("Shishir");
-    }
-}
+//Bounded Generics
+//        Suppose you are working with a generic class. Client can pass any Non primitive type. But if I want to restrict the types,
+//then we use concept of bounded generics
+
+// This is of 2 types
+//    upper bound -- for ex: if we set upper bound as Number (we are restricting the client to only pass Number or its descendents. Now they cannot pass any other class like String etc
+//    multi bound
+
+//    Object (Parent)
+//   Number(child1)        String(child2) and so on..
+//  Integer,Double,and so on
+
+//  Multi bound:
+<T extends Superclass & interface1 & interfaceN>
+//  We are essentially saying that we can pass an object which extends Superclass and implements interface1 and interfacen
+//  The first restrictive type should be a concrete class
+//  2,3, and so on can be interfaces
+
+// As we know, in java a class can only extend one class, but it can implement multiple interfaces
+//reason: lets assume that a class can inherit 2 classes, Parent1 & Parent2. Both Paren1 & Parent2 have a method display()
+//Parent1     Parent2
+//        Child
+//Child class is inheriting Parent1 & Parent2 just for explaination purpose (not possible in actual)
+//If I create an object of Child class (new Child()) and call method display(), compiler will not be able to determine which method to call since they both(Parent1 and Parent2) provide method display().
+//Hence for this reason, Java doesnt allow inheriting multiple classes.
+//
+//But you can implement multiple interfaces
+//Assumer your Child Class implements 2 interfaces interface1 and interface2
+//
+//Interface1      Interface2
+//        Child
+//Since in interfaces we only give method definition and not the actual implementation, here there's not going to be any conflict.
+//Child class will override the display() from both the interfaces and will provide the implementation. Since there's just one implementation which is provided by the Child class, there's no conflict and Java can easily resolve which method to call.
+
+
+ex:
 
