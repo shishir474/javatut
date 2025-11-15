@@ -1,0 +1,19 @@
+Types of classes in Java
+
+1. Concrete Class
+2. Abstract Class
+3. Super Clas & Sub Class
+4. Object Class
+5. Nested Class
+    1. Inner Class (Non static nested class)
+    2. Anonymous Inner Class
+    3. Member inner class
+    4. Local Inner Class
+    5. Static Nested Class / Static class
+6. Generic Class
+7. POJO Class
+8. Enum Class
+9. Final Class
+10. Singleton Class
+11. Immutable Class
+12. Wrapper Class
