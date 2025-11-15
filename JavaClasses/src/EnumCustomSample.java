@@ -58,7 +58,7 @@ public class Main{
 }
 
 
-// Method Override
+// Enum with Method Override
 public enum EnumSample3{
     MONDAY{
         @Override
@@ -78,5 +78,70 @@ public enum EnumSample3{
     // This way you can provide for each enum their own separate versions
     public void dummyMethod(){
         System.out.println("default dummy method");
+    }
+}
+
+
+// Enum with Abstract methods
+public enum EnumSample3{
+    MONDAY{
+        public void dummyMethod(){
+            System.out.println("Monday dummy method");
+        }
+    },
+    TUESDAY{
+        public void dummyMethod(){
+            System.out.println("Tuesday dummy method");
+        }
+    },
+    WEDNESDAY{
+        public void dummyMethod(){
+            System.out.println("Wednesday dummy method");
+        }
+    };
+
+    // defined an abstract method -- now each enum constant has to provide its implementation
+    public abstract void dummyMethod();
+}
+
+
+public class Main{
+    public static void main(String[] args){
+        // since getEnumFromValue() is a static method, I dont need an object, and can call the method using classname itself.
+        EnumSample3 mondayEnumSample =  EnumSample3.MONDAY;
+        mondayEnumSample.dummyMethod();
+    }
+}
+
+
+
+// Enums with interfaces
+public interface MyInterface{
+    public void toLowerCase();
+}
+
+// interfaces are generally used with enums when you want the same method to be used by all the enum constatns
+
+// below enum EnumSample4 implements one interface MyInterface
+public enum EnumSample4 implements MyInterface{
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY;
+
+    // this method is generic and common for all. Instead of declaring it as abstract & then providing the implementation for each enum
+    // we used interface
+    // providing the implmentation of the interface's method - ofcourse, you can override it as well for each enum constant
+    @Override
+    public String toLowerCase() {
+        // here this refers to enum constant MONDAY, TUESDAY etc
+        return this.name().toLowerCase();
+    }
+}
+
+public class Main{
+    public static void main(String[] args){
+       EnumSample4 mondayEnumSample =  EnumSample4.MONDAY;
+       mondayEnumSample.toLowerCase();
+       // output: monday
     }
 }
