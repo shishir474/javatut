@@ -208,6 +208,60 @@ public class Interface2 {
     }
 
 
+Difference between abstract class & interface
+    1. Keyword
+        abstract class: Keyword used here is abstract
+        interface: Keyword used here is interface
+
+    2. child class keyword
+        abstract class:  Child classes need to use keyword "extends"
+        interface:  Child classes need to use keyword "implements"
+
+    3. Method types
+    abstract class:  It can have both abstract & non abstract methods.
+    interface: It can only have abstract methods. (From Java8 onwards, it can have default, private and static methods too where we can provide implementation)
+
+    4.  Inheritance
+    abstract class:  It can extend from another class and multiple interfaces. (We know that, in java any class - abstract or concrete - can extend only class. That one superclass can be abstract or concrete. )
+    interface: It can only extend from other interfaces. It cannot extend clasess.
+
+        An interface cannot extend a class, whether the class is: abstract or concrete
+            class A {}
+
+            interface B extends A {}   // ❌ Not allowed
+
+        An interface can extend one or more interfaces.
+            interface A {
+                void methodA();
+            }
+
+            interface B {
+                void methodB();
+            }
+
+            interface C extends A, B {   // ✔️ multiple inheritance is allowed
+                void methodC();
+            }
+
+    5. Field types
+    abstract class:  Variables can be static, non static, final, non final etc.
+    interface: Variables are by default constants (public static final always).
+
+    6. Access modifiers
+        abstract class:  Variables & methods can be private, protected, public, default.
+    interface:  Variables & methods are by default public (In Java9, private method is supported).
+
+    7. Providing implementation
+    abstract class:  It can provide the implementation of the interface.
+    interface: It can not provide implementation of any other interface or abstract class.
+
+    8. Constructor
+    abstract class:  It can have constructor.
+    interface:  It cannot have constructor.
+
+    9. declaring method abstract
+    abstract class:  To declare the method abstract, we have to use "abstract" keyword and it can be protected, public, default.
+    interface: No need for any keyword to make method abstract, and its by default public.
 
 
 }
