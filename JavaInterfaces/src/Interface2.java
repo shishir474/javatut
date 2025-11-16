@@ -128,4 +128,86 @@ public class Interface2 {
 
     }
 
+
+//    Nested Interface (not used much, but good to know stuff)
+
+//    - nested interface declared within another interface
+//    - nested interface declared within a class
+
+//    Generally they are used to group logical related interfaces.
+
+//    Rules:
+//    - A nested interface declared within an interface must be public.
+//    - A nested interface declared within a class can have any access modifier.
+//    - When you implement outer interface, inner interface implementation is not required & vice versa.
+
+//    Ex of Nested interface
+    public interface Bird{
+        public void canFly();
+
+        public interface NonFlyingBird{
+            public void canRun();
+        }
+    }
+    // 3 possible scenarios
+    // case1: class implements only the outer interface - so you have to provide the implementation of the methods only from the outer interface
+    public class Eagle implements Bird{
+        @override
+        public void canFly(){
+            // implementation goes here
+        }
+    }
+
+    // case2: class implements only the inner interface - so you have to provide the implementation of the methods only from the inner interface
+    public class Eagle implements Bird.NonFlyingBird{
+        @override
+        public void canRun(){
+            // implementation goes here
+        }
+    }
+    // How will you invoke canRun() method?
+    public class Main{
+        public static void main(String[] args){
+            // In the main method, create an object of the concrete Eagle class
+            // its reference can be stored in Eagle, or in parent (interface)
+            Bird.NonFlyingBird obj =  new Eagle();
+            obj.canRun();
+        }
+    }
+
+    // case3: class implements both outer & inner interface - - so you have to provide the implementation of the methods only from both the inner & outer interface
+    public class Eagle implements Bird, Bird.NonFlyingBird{
+        @override
+        public void canFly(){
+            // implementation goes here
+        }
+
+        @override
+        public void canRun(){
+            // implementation goes here
+        }
+    }
+
+
+//    Ex: Nested Interface within a class
+
+    // Nested interface within a class can have any access modifier. This is because a class can have member variables that can be private, protected, default or public.
+    // The nested interface within the class is just like another member. SO it can also have any possible access modifier
+
+    public class Bird{
+        protected interface NonFlyingBird{
+            public void canRun();
+        }
+    }
+
+    public class Eagle implements Bird.NonFlyingBird{
+        @override
+        public void canRun(){
+
+        }
+    }
+
+
+
+
 }

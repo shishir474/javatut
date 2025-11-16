@@ -1,5 +1,13 @@
 public class Interface {
-//    What is interface?
+//    Java Interfaces in Depth -- covers following points
+//    1. What is interface & how to define
+//    2. Why we need interface
+//    3. Methods in interface
+//    4. Fields in interface
+//    5. Interface implementation
+//    6. Nested interface
+//    7. Difference between abstract class & interface
+
 
 //  How to define interface?
 //    Interface declaration consists of
