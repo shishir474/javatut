@@ -163,12 +163,11 @@ public class Interface4 {
     }
 
 //   Usage
-    TriConsumer<String, Integer, Double> tri = (a,b,c) -> {
+    TriConsumer<String, Integer, Double> triObj = (a,b,c) -> {
         System.out.println(a + ", " + b + ", " + c);
     };
 
-    tri.accept("test", 10, 3.14);
-
+//    triObj.accept("test", 10, 3.14);
 
 //    ex:
     public class Main{
