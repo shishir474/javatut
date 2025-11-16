@@ -9,6 +9,18 @@ public class Interface {
 //    7. Difference between abstract class & interface
 
 
+//    Java8 Interface features:
+//    - Default methods
+//        How to handle usecase when class implements multiple interfaces & they have the same name for the default methods.
+//    - Static method
+//    - Functional Interface & Lambda Expression (IMP)
+
+
+//    Java9 Feature:
+//    - Private method
+//    - Private static method
+
+
 //  How to define interface?
 //    Interface declaration consists of
 //    - Modifiers (only public or default are allowed. Private/Protected is not allowed with interfaces)
