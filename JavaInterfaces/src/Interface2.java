@@ -84,4 +84,48 @@ public class Interface2 {
         }
     }
 
+
+//    Interface implementation
+//    1. Overriding method cannot have more restrict access specifier. By default, the methods are public in interface, it cannot be declared protected in the concrete class.
+//    2. Concrete class must override all the methods declared in the interface.
+//    3. Abstract class can also implement the interface, but it is not forced to provide the implementation for all the interface methods.
+//    Also abstract class can have its own set of abstract methods.
+//    Concrete class inheriting the abstract has to provide the implementation of all the methods(from interface & abstract class)
+//    4. A class can implement multiple interfaces, but a class can only extend one class. If a class explicitly extends another class, then that class becomes the parent.
+//    if no explicit parent class is mentioned, then Object class is the Parent class. Either way, a class always extends exactly one class in java.
+    public interface BirdSample{
+        public void canFly();
+    }
+    public class EagleSample implements BirdSample{
+        @override
+        protected void canFly();     // X not allowed. Overriding method cannot restrict the access specifier
+    }
+
+
+    public interface Bird{
+        public void canFly();
+        public void noOfLegs();
+    }
+
+    public abstract class Eagle implements Bird{
+        @override
+        public void canFly(){
+            // implementation goes here
+        }
+
+        public abstract void beakLength();
+
+    }
+
+    public class WhiteEagle extends Eagle{
+        public void noOfLegs(){
+            // implement interface method
+        }
+
+        public void beakLength(){
+            // implementating abstract class method
+        }
+
+    }
+
 }
