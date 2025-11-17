@@ -71,7 +71,37 @@ public class Reflections3 {
         }
     }
 
+//    Disadvantages of Reflections:
+//        - 1. Reflection is much slower because it:
+//                a. bypasses normal JVM optimizations
+//                b. requires dynamic lookups
+//        Calling a method via reflection is slower than direct invocation.
+
+//        - 2. Breaks encapsulation
+//                You can access private fields/methods, violating OOP principles.
+//                This can lead to:
+//                    - security issues
+//                    - unpredictable behavior
+
+//        - 3. More error-prone
+//                Reflection errors occur at runtime, not compile-time.
+//                You can lose type safety.
 
 
+//        What is Type Safety?
+//            Type safety means that the compiler ensures you use the correct data types in your code.
+//            If you make a mistake (wrong type), the compiler catches it at compile time, before your program runs.
 
+//        Example (type safety)
+            String s = "Hello";
+            int x = s;   // ❌ Compile-time error
+
+//            Reflection breaks type safety
+//                Reflection involves retrieving fields/methods dynamically using:
+            Field f = obj.getClass().getDeclaredField("age");
+            Object value = f.get(obj);
+//              The compiler cannot check whether "age" actually exists.
+//              The compiler cannot check what type it returns.
+//              The compiler cannot validate if you’re setting the correct type.
+//           Everything is checked only at runtime.
 }
