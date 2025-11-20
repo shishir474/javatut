@@ -1,7 +1,6 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import com.sun.jdi.IntegerValue;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -357,6 +356,246 @@ public class Collections3 {
 
         }
     }
+
+
+
+//    LinkedList
+//    - it implements both Deque and List interface
+//    - Means it supports Deque methods like - getFirst(), getLast(), removeFirst(), removeLast()
+//                                    +
+//    - it also supports index based operations like list - getIndex(int index), remvove(int index), add(int index, Object o);
+
+    class Main {
+        public static void main(String[] args) {
+            LinkedList<Integer> list = new LinkedList<>();
+            // using Deque functionality
+            list.addLast(100);
+            list.addLast(200);
+            list.addLast(300);
+            list.addFirst(400);
+            System.out.println(list.size());
+
+            System.out.println("printing list using lambda expression");
+            list.forEach(val -> System.out.println(val));
+
+            System.out.println("printing list using for loop");
+            for(int i = 0; i<list.size(); i++){
+                System.out.println(list.get(i));
+            }
+
+            System.out.println("printing list using enhanced for loop");
+            for(Integer val: list){
+                System.out.println(val);
+            }
+
+            // Using list functionality
+            LinkedList<Integer> list2 = new LinkedList<>();
+            list2.add(100);
+            list2.add(200);
+            list2.add(300);
+            list2.add(400);
+
+            System.out.println("printing list2 using lambda expression");
+            list2.forEach(val -> System.out.println(val));
+
+            list2.add(1, 500);
+
+            System.out.println("printing list2 using lambda expression");
+            list2.forEach(val -> System.out.println(val));
+
+            list2.remove(3);
+            System.out.println("printing list2 using lambda expression");
+            list2.forEach(val -> System.out.println(val));
+
+
+        }
+    }
+
+//    Time Complexity:
+//    insertion at start or end -  O(1): using Deque functionality addFirst(), addLast()
+//    insertion at particular index - O(n) for lookup of the index + O(1) for adding
+//
+//    Deletion at start or end : O(1)
+//    Deletion at specific index : O(n) for the lookup + O(1) for removal
+//
+//    Search: O(N)
+//    Space Complexity:
+//        O(n)
+
+//                    isThreadSafe        Maintains Order         Duplicates allowed          Nulls allowed
+//    LinkedList           No                  Yes                     Yes                         Yes
+
+//    Like ArrayList, LinkedList is also not thread safe.
+
+
+
+//  Vector
+//        - Exactly same as ArrayList, elements can be accessed via index.
+//        - But is thread safe. (uses synchronized blocks for all implementations -- this makes it thread safe)
+//        - Puts lock when operation is perform on Vector
+//        - Less efficient than ArrayList as for each operation it performing lock/unlock internally
+
+    class Main {
+        public static void main(String[] args) {
+            Vector<Integer> v = new Vector<>();
+            v.add(100);
+            v.add(200);
+            v.add(300);
+
+            System.out.println(v.size());
+            for(int val: v){
+                System.out.println(val);
+            }
+
+        }
+    }
+
+//    Stacks
+//    - Represents LIFO operation
+//    - Since it extends Vector, its method is also Synchronized.
+
+//    Stack can be implemented via Deque as well (we previously implemented this)
+//        But Deque is not thread safe, Stack is.
+
+    class Main {
+        public static void main(String[] args) {
+            Stack<Integer> s = new Stack<>();
+            s.push(10);
+            s.push(20);
+            s.push(30);
+
+            //   E push(E item)
+            //   synchronized E pop()
+            //   E peek()
+            //   boolean empty()
+            //.  int search(Object o)
+            while(!s.empty()){
+                System.out.println(s.pop());
+            }
+        }
+    }
+//    TC:
+//    insertion: O(1) - always inserts at the top
+//    Deletion: O(1)
+//    Search: O(n)
+
+//    SC: O(n)
+
+//                  isThreadSafe                   Maintains Inertion Order         Duplicates allowed          Nulls allowed
+//    Stack           Yes (extends Vector)               Yes                             Yes                         Yes
+
+
+//    Why Vector<int> v = new Vector<>(); is invalid?
+//    Because generics does not support primitive data types.
+//    With Java generics you can only use Reference/Non primitive datatypes like Integer, Double,  Boolean etc.
+//
+//    Why can't generics use primitives?
+//        Because Java generics rely on type erasure, and primitive types don't fit into that mechanism.
+//        Only reference types (Integer, String, Double, etc.) can be used. Java provides wrapper classes so that primitives can be boxed automatically.
+//
+//    Why Java relies on type erasure for generics?
+//        To ensure backward compatibility with pre java5 code. Before java5, generics did not exist. Collections looked like this:
+//            List list = new ArrayList();
+//            list.add("Hello");
+//            list.add(10);       // totally allowed
+//        When generics were introduced in Java 5:
+//            List<String> list = new ArrayList<>();
+//        Java needed this to still work with old JVMs and old .class files
+//        Type erasure means:
+//            - Generic types exist only at compile-time
+//            - The compiler checks type safety
+//            - At runtime, generics are removed (“erased”) → JVM sees raw types
+//            - This allows code compiled with generics to still run on older JVMs.
+
+//        Generics were designed so old bytecode doesn't break.
+
+//    🎯 Why Were Generics Introduced?
+//       Before Java 5, Java collections stored Object, and developers had to manually cast everything:
+//      This caused:
+//        ❌ Runtime errors
+//        ❌ Lack of compile-time checking
+//        ❌ Messy code with manual casting
+//        ❌ No clarity about what the collection contains
+//     Generics were introduced to solve these exact problems.
+
+//    Advantage of Generics
+//        - Compile time safety: Generics prevent type errors at compile time, not at runtime.
+//        - No need for manual casting
+//        - better code readability & intent declaration
+//        - Eliminates many ClassCastException problems
+//                Before generics: you could insert anything (String, Integer, Object) and the failure happens LATE (runtime)
+//                With generics, errors are detected EARLY (compile time) improving reliability
+//        - Allows creation of generic algorithms - one method works with any datatype. Generic algorithms reduces redundent code
+
+//    Summary:
+//      Generics were introduced to bring compile-time type safety, remove unnecessary casts, improve code clarity,
+//      and allow the creation of reusable, type-independent algorithms.
+//      They make Java collections safer and programs more robust by preventing ClassCastException at runtime.
+
+//      NOTE: Generics in Java are implemented using type erasure.
+//      The compiler enforces type safety and removes generic type parameters when generating bytecode, replacing them with raw types or bounds.
+//      While the actual generic types are erased at runtime, some generic metadata is preserved in .class files for reflection.
+
+//      Generic type parameters (like <T>, <Integer>, <String>) are removed during compilation and replaced with their bounds (Object or an upper bound like Number)
+//      The resulting .class file contains no info about generic types at runtime (except for some metadata in reflection).
+//      JVM does not see generics. it only sees raw types like List instead of List<String> or Map instead of Map<String,Integer>
+//      But generics are not fully erased from .class file. Some of that info is preserved in the class metadata for reflection.
+//            For ex: .class file still contains
+//                - method signature with generics
+//                - field signrature with generics
+//                - annotation metadata
+//                - generic bounds
+
+
+//    How autoboxing converts int → Integer?
+//      Autoboxing is the automatic conversion of a primitive (int, double, boolean …) into its corresponding
+//      wrapper class (Integer, Double, Boolean, …) done by the compiler, not the JVM.
+//      int x = 10;
+//      Integer y = x; // autoboxing
+
+//    This line -->  Integer y = x;
+//    is converted by the compiler into --> Integer y = Integer.valueOf(x);
+//    SO autoboxing is just syntactic sugar for calling valueOf()
+
+//    Why does Java use Integer.valueOf() and NOT new Integer()?
+//      Because valueOf() uses an internal cache for values between -128 and 127, improving memory efficiency and speed.
+//      ex:
+//      List<Integer> list = new ArrayList<>();
+//      list.add(400);
+//      Java rewrites it as : list.add(Integer.valueOf(400));
+
+//    What about large values > 127 or < -127?
+//      When you autobox a large int such as
+//      Integer a = 1000;
+//      Integer b = 1000;
+//      Java still calls Integer.valueOf(1000). But the key point is 1000 is NOT in the Integer cache.
+//      The default integer cache range is : -128 to +127
+//      So for 1000: JVM checks the cache. -> not found. It creates a new Integer object. Each autobox of 1000 creates another separate object.
+//      So a and b points to different objects
+
+//            System.out.println(a == b); // false
+//            System.out.println(a.equals(b)); // true
+
+//      == -> compares references, different objects -> false
+//      .equals() -> compares values -> true
+
+//      We can also change the integer cache range using a JVM flag : AutoBoxCacheMax = 1000
+//      This would cache integers from -128 to +1000
+
+
+//    Autoboxing happens ONLY for these pairs:
+//      Primitive	Wrapper
+//      int	        Integer
+//      long	    Long
+//      double	    Double
+//      float	    Float
+//      char	    Character
+//      byte	    Byte
+//      short	    Short
+//      boolean	    Boolean
+
+//    Integer x = 10;
+//    int y = x; // unboxing
 
 }
 
