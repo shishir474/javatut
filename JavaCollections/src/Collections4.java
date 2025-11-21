@@ -10,9 +10,9 @@ public class Collections4 {
 //     |               |                   |                   |
 //    SortedMap(i)       HashMap             Hashtable     LinkedHashMap
 //     | extends
-//    NavigableSet (i)
+//    NavigableMap (i)
 //     | implements
-//    TreeSet
+//    TreeMap
 
     //    Hashmap Internal Working in Java (V IMP for interviews)
 
