@@ -1,6 +1,7 @@
 import com.sun.source.tree.Tree;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Collections5 {
 //    LinkedHashMap & TreeMap
@@ -71,7 +72,7 @@ public class Collections5 {
 
 //         TimeComplexity is same as HashMap : Average O(1) , Worst case: O(logn)
 
-//         LinkedHashMap is not thread safe and there is no thread safe version available for this.
+//         NOTE: LinkedHashMap is not thread safe and there is no thread safe version available for this.
 
 //         We have to explicitly make it thread safe like this:
           Map<Integer, String> = mp = Collections.synchronizedMap(new LinkedHashMap<>());
@@ -198,6 +199,34 @@ public class Collections5 {
 
         // tailMap(k) is inclusive of key passed - returns the tail portion of the map
         NavigableMap<Integer, String> tailMap =nmap.tailMap(23);
+
+
+
+//      Summary
+
+         //                implements
+//    Map (i) <----------------------------------------------------
+//     | extends                      |           |           |
+//    SortedMap (i)                   HashMap     Hashtable   LinkedHashMap
+//     |  extends
+//    NavigableMap (i)
+//     | implements
+//    TreeMap (concrete class)
+
+//         1. HashMap --> normal map (not thread safe), does not maintain insertion/access order
+//         2. Concurrent Version of HashMap -> HashTable(does not maintain insertion/access order) or ConcurrentHashMap
+//         3. LinkedHashMap -  maintains the insertion order
+//            - you can either maintain the insertion order (default version)
+//            - you can maintain the access order (pass accessOrder: true while creating LinkedHashMap)
+//            - If you want to maintain the insertion order -- use LinkedHashMap (rarely used)
+//            - not thread safe, but we can create its thread safe version using Collections.synchronizedMap(new LinkedHashMap<>())
+//         4. TreeMap
+//             -- all the keys are stored in increasing / decreasing fashion
+//             -- useful when you want to operate on keys in inc/desc order
+//             -- not thread safe
+//
+//                 Collections.synchronizedMap(new TreeMap<>())
+
 
 
 
