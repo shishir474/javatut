@@ -69,8 +69,10 @@ public class Collections1 {
 //    Map (i) <----------------------------------------------------
 //     | extends                      |           |           |
 //    SortedMap (i)                   HashMap     Hashtable   LinkedHashMap
+//     |  extends
+//    NavigableMap (i)
 //     | implements
-//    TreeMap
+//    TreeMap (concrete class)
 
 //    NOTE:
 //      Entities marked with (i) represents interfaces, whereas the others are concrete classes
