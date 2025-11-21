@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Collections4 {
 //    Map
@@ -425,6 +427,25 @@ public class Collections4 {
         }
 
     }
+
+//    Map Properties:
+//    - Its an interface and its implementations are:
+//        - HashMap: does maintain the insertion order
+//        - HashTable: synchronized version of HashMap
+//        - LinkedHashMap: Maintains the insertion order
+//        - TreeMap: sorts the data internally
+//    - Objects that maps key to value
+//    - cannot contain duplicate key
+
+//    HashMap:
+//    - can store null key or value (HashTable do not contains null key or value)
+//    - HashMap does not maintain the insertion order.
+//    - HashMap is not thread safe (insted use ConcurrentHashMap or HashTable for thread safe implementation)
+
+//    HashTables
+//     - HashTable is exactly same as HashMap.
+//     - HashMap is not thread safe, whereas HashTable is.
+//     - HashMap can store null key or value (HashTable do not contains null key or value)
 
 
 
